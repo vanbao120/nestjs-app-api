@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  dev-database:
+    image: postgres:15.0
+    container_name: dev-database
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Abc123456
+      POSTGRES_DB: nestdb
+    networks:
+      - nestjs-network
+  test-database:
+    image: postgres:15.0
+    container_name: test-database
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Abc123456
+      POSTGRES_DB: nestdb
+    networks:
+      - nestjs-network
+networks:
+  nestjs-network:
+#Create container,network,...from "docker composer" file:
+#-d: deamon/background mode
+#docker compose up -d 
+#if you want to start only specified services/container:
+#docker compose up -d dev-database -d
+#How to remove containers+volumes
+#docker compose rm dev-database --stop --force --volumes
